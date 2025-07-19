@@ -24,7 +24,7 @@ export default tseslint.config(
         SharedArrayBuffer: 'readonly',
       },
 
-      ecmaVersion: 2023,
+      ecmaVersion: 'latest',
       sourceType: 'module',
     },
     settings: {

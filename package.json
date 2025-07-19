@@ -51,6 +51,8 @@
     "zustand": "^5.0.6"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@stylistic/eslint-plugin": "^4.2.0",
     "@tanstack/router-plugin": "^1.121.29",
     "@types/markdown-it": "^14.1.2",
