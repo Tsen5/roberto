@@ -1,7 +1,29 @@
-import styled from '@emotion/styled';
+import { useTheme } from '@emotion/react';
+import { AnchorHTMLAttributes, DetailedHTMLProps } from 'react';
 
-const CustomAnchorComponent = styled('a')(({ theme }) => ({
-  color: theme.colors.tokens.info,
-}));
+// import { shell } from 'electron';
+
+export type CustomAnchorComponentProps = DetailedHTMLProps<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  HTMLAnchorElement
+>;
+
+const CustomAnchorComponent = ({
+  children,
+  ...props
+}: CustomAnchorComponentProps) => {
+  const theme = useTheme();
+
+  return (
+    <a
+      css={{ color: theme.colors.tokens.info }}
+      target="_blank"
+      rel="noreferrer"
+      {...props}
+    >
+      {children}
+    </a>
+  );
+};
 
 export default CustomAnchorComponent;
