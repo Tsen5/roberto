@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { Chat, ChatStatus } from '../../../../../../electron/types/chat';
 import useChatTitle from '../../../../../hooks/useChatTitle';
 
+import useChatEmoji from '../../../../../hooks/useChatEmoji';
 import { getLinkStyle } from './getLinkStyle';
 import Title from './title';
 import TitleInput from './title-input';
@@ -33,6 +34,7 @@ const ChatLink = ({ chat }: ChatLinkProps) => {
   const [titleInputValue, setTitleInputValue] = useState<string>('');
 
   const { title, setTitle } = useChatTitle(chat);
+  const { emoji } = useChatEmoji(chat);
 
   const inputPlaceholder = useMemo(() => {
     if (chat.title) {
@@ -88,7 +90,7 @@ const ChatLink = ({ chat }: ChatLinkProps) => {
       params={{ chatId: chat.id }}
       css={getLinkStyle(isCurrent, theme)}
     >
-      {chat.emoji && <div>{chat.emoji}</div>}
+      {emoji && <div>{emoji}</div>}
       {!isEditingTitle && (
         <Title
           onClick={handleEditTitle}

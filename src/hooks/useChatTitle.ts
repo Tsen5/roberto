@@ -7,7 +7,7 @@ import { Chat } from '../../electron/types/chat';
 export const CHAT_TITLE_STORAGE_KEY = 'chat-title';
 
 const useChatTitle = (
-  chat: Chat,
+  chat: Pick<Chat, 'id' | 'title'>,
 ): {
   title: string;
   setTitle: (title: string | null) => void;
