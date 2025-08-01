@@ -8,9 +8,9 @@ const EmojiPickerSearch = styled(EmojiPicker.Search)(({ theme }) => ({
   fontSize: 16,
   padding: `${theme.sizes.spacing.getSpacing(0.5)}px ${theme.sizes.spacing.getSpacing(1)}px`,
   borderRadius: theme.sizes.radius.getRadius(0.5),
-  background: transparentize(theme.colors.palette.darkGrey, 0.9),
   marginTop: theme.sizes.spacing.getSpacing(1),
   marginBottom: theme.sizes.spacing.getSpacing(1),
+  background: transparentize(theme.colors.palette.darkGrey, 0.9),
   '&:hover': {
     background: transparentize(theme.colors.palette.darkGrey, 0.85),
   },

@@ -5,6 +5,9 @@ export default {
     escapeKey: 'Esc',
     loadingEmojis: 'Chargement',
     noEmojiFound: 'Aucun emoji trouvé',
+    createdAt: 'Création :',
+    updatedAt: 'Dernière modification :',
+    messagesCount: 'Messages :',
   },
   button: {
     copyCode: 'Copier le code',

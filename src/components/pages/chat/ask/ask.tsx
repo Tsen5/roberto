@@ -1,4 +1,4 @@
-import { SendHorizonal } from 'lucide-react';
+import { Info, SendHorizonal } from 'lucide-react';
 import {
   ChangeEvent,
   MouseEvent,
@@ -12,12 +12,16 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useEventListener } from 'usehooks-ts';
 
+import { useTheme } from '@emotion/react';
 import { Chat, ChatStatus } from '../../../../../electron/types/chat';
 import usePlatform from '../../../../hooks/usePlatform';
 import KeyBadge from '../../../layout/titlebar/section-center/key-badge';
 import IconButton from '../../../ui/icon-button/icon-button';
 import Spinner from '../../../ui/spinner/spinner';
 
+import { getGlassmorphismStyle } from '../../../../helpers/getGlassmorphismStyle';
+import useChatsStore from '../../../../stores/chats';
+import Flex from '../../../ui/flex/flex';
 import AskInput from './ask-input';
 import AskInputCard from './ask-input-card';
 import AskInputContainer from './ask-input-container';
@@ -29,6 +33,10 @@ export interface AskProps {
 
 const Ask = ({ ref, chat }: AskProps) => {
   const { t } = useTranslation('chats');
+  const theme = useTheme();
+
+  const isDetailsPanel = useChatsStore((state) => state.isDetailsPanel);
+  const setIsDetailsPanel = useChatsStore((state) => state.setIsDetailsPanel);
 
   const platform = usePlatform();
 
@@ -99,6 +107,10 @@ const Ask = ({ ref, chat }: AskProps) => {
     askInputRef.current?.focus();
   }, []);
 
+  const toggleIsDetailsPanelOpen = useCallback(() => {
+    setIsDetailsPanel(!isDetailsPanel);
+  }, [isDetailsPanel, setIsDetailsPanel]);
+
   useEffect(() => {
     if (chat.id) {
       askInputRef.current?.focus();
@@ -109,35 +121,70 @@ const Ask = ({ ref, chat }: AskProps) => {
 
   return (
     <AskInputContainer ref={ref}>
-      <AskInputCard onClick={handleClickInputContainer}>
-        <AskInput
-          ref={askInputRef}
-          value={askInputValue}
-          onChange={handleChangePrompt}
-          onKeyDown={handleAskInputKeyDown}
-          onFocus={handleFocusAskInput}
-          onBlur={handleInputBlur}
-          placeholder={t('text.askAnything')}
-        />
-        <KeyBadge css={{ marginRight: 0, marginTop: 7 }}>
-          {isAskInputFocused ? t('label.escapeKey') : metaKey}
-        </KeyBadge>
-        <IconButton
-          color="icon"
-          variant="plain"
-          onClick={handleAsk}
-          disabled={!isAskInputValueValid}
+      <Flex
+        direction="row"
+        grow={1}
+        gap={2}
+        align="flex-end"
+        css={{ maxWidth: theme.sizes.layout.chat.maxWidth }}
+      >
+        <AskInputCard onClick={handleClickInputContainer}>
+          <AskInput
+            ref={askInputRef}
+            value={askInputValue}
+            onChange={handleChangePrompt}
+            onKeyDown={handleAskInputKeyDown}
+            onFocus={handleFocusAskInput}
+            onBlur={handleInputBlur}
+            placeholder={t('text.askAnything')}
+          />
+          <KeyBadge css={{ marginRight: 0, marginBottom: 7 }}>
+            {isAskInputFocused ? t('label.escapeKey') : metaKey}
+          </KeyBadge>
+          <IconButton
+            color="icon"
+            variant="plain"
+            onClick={handleAsk}
+            disabled={!isAskInputValueValid}
+          >
+            {chat.status === ChatStatus.RESPONDING ? (
+              <Spinner size={22} color="icon" />
+            ) : (
+              <SendHorizonal
+                size={22}
+                css={{ opacity: !isAskInputValueValid ? 0.5 : 1 }}
+              />
+            )}
+          </IconButton>
+        </AskInputCard>
+        <Flex
+          align="center"
+          height={58}
+          justify="center"
+          css={{
+            aspectRatio: '1 / 1',
+            ...getGlassmorphismStyle({
+              backgroundOpacity: 0.7,
+              boxShadowOpacity: 0,
+            }),
+            borderRadius: theme.sizes.radius.getRadius(1.5),
+            '&:hover': {
+              ...getGlassmorphismStyle({
+                backgroundOpacity: 0.9,
+                boxShadowOpacity: 0,
+              }),
+            },
+          }}
         >
-          {chat.status === ChatStatus.RESPONDING ? (
-            <Spinner size={22} color="icon" />
-          ) : (
-            <SendHorizonal
-              size={22}
-              css={{ opacity: !isAskInputValueValid ? 0.5 : 1 }}
-            />
-          )}
-        </IconButton>
-      </AskInputCard>
+          <IconButton
+            color="info"
+            variant={isDetailsPanel ? 'soft' : 'plain'}
+            onClick={toggleIsDetailsPanelOpen}
+          >
+            <Info size={22} />
+          </IconButton>
+        </Flex>
+      </Flex>
     </AskInputContainer>
   );
 };

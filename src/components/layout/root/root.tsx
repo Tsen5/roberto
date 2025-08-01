@@ -1,7 +1,7 @@
 import { Outlet } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
 import Body from '../body/body';
+import DetailsPanel from '../details-panel/details-panel';
 import Page from '../page/page';
 import Sidebar from '../sidebar/sidebar';
 import Titlebar from '../titlebar/titlebar';
@@ -20,8 +20,9 @@ const Root = () => (
         <Body>
           <Outlet />
         </Body>
+        <DetailsPanel />
       </Page>
-      <TanStackRouterDevtools />
+      {/* <TanStackRouterDevtools /> */}
     </ContentWrapper>
   </Background>
 );

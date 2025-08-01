@@ -7,7 +7,8 @@ const AskInput = styled('textarea')(() => ({
   fieldSizing: 'content',
   fontSize: 18,
   lineHeight: '21px',
-  marginTop: 5,
+  marginBottom: 5,
+  maxHeight: 200,
 }));
 
 export default AskInput;
