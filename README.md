@@ -103,3 +103,24 @@ npm run clean         # Clean build artifacts
 ├── models/                  # LLM model files
 └── public/                  # Static assets
 ```
+
+## 🔮 Future Improvements
+
+### Data Persistence
+
+- **Local Database** : Add a database to automatically save conversations when the application closes
+- **Backup/Export** : Export and import conversation functionalities
+
+### Conversation Information
+
+- **Enhanced Sidebar** : Add detailed information about each conversation in the sidebar
+- **Automatic Summaries** : Automatic generation of conversation summaries
+- **Context Modification** : Interface to modify and adjust conversation context
+- **Metadata** : Display conversation statistics (message count, duration, etc.)
+
+### Document Usage
+
+- **Multi-format Support** : Ability to transmit documents (images, videos, text) to the model
+- **Drag & Drop Interface** : Intuitive interface to add documents to a conversation
+- **Content Analysis** : The model will be able to analyze and use document content as context
+- **Preview** : Display documents in the chat interface
