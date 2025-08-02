@@ -7,6 +7,7 @@ export default {
     escapeKey: 'Esc',
     newChat: 'New Chat',
     chats: 'Chats',
+    pinnedChats: 'Pinned chats',
   },
   text: {
     noTitle: 'No title',

@@ -3,9 +3,13 @@ import { transparentize } from 'color2k';
 
 import { getGlassmorphismStyle } from '../../../../../helpers/getGlassmorphismStyle';
 
-import { CHAT_LINK_ICON_CLASS } from './chat-link';
+import { CHAT_LINK_PIN_BUTTON_CLASS, CHAT_LINK_ICON_CLASS } from './chat-link';
 
-export const getLinkStyle = (isCurrent: boolean, theme: Theme) => ({
+export const getLinkStyle = (
+  isCurrent: boolean,
+  theme: Theme,
+  variant?: 'default' | 'pinned',
+) => ({
   padding: theme.sizes.spacing.getSpacing(1),
   borderRadius: theme.sizes.radius.getRadius(1),
   cursor: 'pointer',
@@ -17,7 +21,7 @@ export const getLinkStyle = (isCurrent: boolean, theme: Theme) => ({
   textDecoration: 'none',
   fontSize: 16,
   lineHeight: '21px',
-  [`& .${CHAT_LINK_ICON_CLASS}`]: {
+  [`& .${CHAT_LINK_ICON_CLASS}, & .${CHAT_LINK_PIN_BUTTON_CLASS}`]: {
     opacity: 0,
   },
   ...(isCurrent && {
@@ -31,12 +35,21 @@ export const getLinkStyle = (isCurrent: boolean, theme: Theme) => ({
     [`& .${CHAT_LINK_ICON_CLASS}`]: {
       opacity: 1,
     },
+    [`&:hover .${CHAT_LINK_PIN_BUTTON_CLASS}`]: {
+      opacity: 1,
+    },
   }),
   ...(!isCurrent && {
-    background: 'transparent',
+    background:
+      variant === 'pinned'
+        ? transparentize(theme.colors.palette.darkGrey, 0.9)
+        : 'transparent',
     '&:hover': {
-      background: transparentize(theme.colors.palette.darkGrey, 0.9),
-      [`& .${CHAT_LINK_ICON_CLASS}`]: {
+      background:
+        variant === 'pinned'
+          ? transparentize(theme.colors.palette.darkGrey, 0.85)
+          : transparentize(theme.colors.palette.darkGrey, 0.9),
+      [`& .${CHAT_LINK_ICON_CLASS}, & .${CHAT_LINK_PIN_BUTTON_CLASS}`]: {
         opacity: 1,
       },
     },

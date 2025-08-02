@@ -1,13 +1,19 @@
-import { useCallback, useMemo } from 'react';
 import { useMatch, useNavigate } from '@tanstack/react-router';
+import { useCallback, useMemo } from 'react';
 import { useEventListener } from 'usehooks-ts';
+import { useTheme } from '@emotion/react';
+import { useTranslation } from 'react-i18next';
 
 import useChats from '../../../../hooks/useChats';
 import Flex from '../../../ui/flex/flex';
+import Overline from '../../../ui/overline/overline';
 
 import ChatLink from './chat-link/chat-link';
+import NewChatItem from './new-chat-item';
 
 const ChatList = () => {
+  const { t } = useTranslation('global');
+  const theme = useTheme();
   const navigate = useNavigate();
 
   const match = useMatch({ from: '/chats/$chatId', shouldThrow: false });
@@ -71,7 +77,16 @@ const ChatList = () => {
   useEventListener('keydown', handleGlobalKeyDown);
 
   return (
-    <>
+    <Flex direction="column" gap={1}>
+      <Overline
+        css={{
+          padding: `0 ${theme.sizes.spacing.getSpacing(1)}px`,
+          color: theme.colors.tokens.icon,
+          fontSize: 13,
+        }}
+      >
+        {t('label.chats')}
+      </Overline>
       {sortedChats.length > 0 && (
         <Flex direction="column" gap={0.5}>
           {sortedChats.map((chat) => (
@@ -79,7 +94,8 @@ const ChatList = () => {
           ))}
         </Flex>
       )}
-    </>
+      <NewChatItem />
+    </Flex>
   );
 };
 

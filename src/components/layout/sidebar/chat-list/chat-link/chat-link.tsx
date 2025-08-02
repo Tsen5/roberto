@@ -11,14 +11,16 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { Chat, ChatStatus } from '../../../../../../electron/types/chat';
-import useChatTitle from '../../../../../hooks/useChatTitle';
 import useChatEmoji from '../../../../../hooks/useChatEmoji';
+import useChatTitle from '../../../../../hooks/useChatTitle';
 
 import { getLinkStyle } from './getLinkStyle';
 import Title from './title';
 import TitleInput from './title-input';
+import PinButton from './pin-button';
 
 export const CHAT_LINK_ICON_CLASS = 'chat-link-icon';
+export const CHAT_LINK_PIN_BUTTON_CLASS = 'chat-link-pin-button';
 
 export interface ChatLinkProps {
   chat: Chat;
@@ -118,11 +120,13 @@ const ChatLink = ({ chat }: ChatLinkProps) => {
         />
       )}
 
+      <PinButton chat={chat} />
+
       <ChevronRight
         className={CHAT_LINK_ICON_CLASS}
         color={theme.colors.tokens.text}
         size={18}
-        css={{ flexShrink: 0, marginLeft: 'auto' }}
+        css={{ flexShrink: 0 }}
       />
     </Link>
   );
