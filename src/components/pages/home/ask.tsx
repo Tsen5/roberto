@@ -119,7 +119,7 @@ const Ask = () => {
         onBlur={handleInputBlur}
         placeholder={t('text.askAnything')}
       />
-      <KeyBadge css={{ marginRight: 0, marginTop: 7 }}>
+      <KeyBadge css={{ marginRight: 0, marginBottom: 7 }}>
         {isAskInputFocused ? t('label.escapeKey') : metaKey}
       </KeyBadge>
       <IconButton
