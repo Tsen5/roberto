@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useEventListener } from 'usehooks-ts';
 import { useCallback, useRef, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
+import { Pin } from 'lucide-react';
 
 import usePinnedChats from '../../../../hooks/usePinnedChats';
 import Flex from '../../../ui/flex/flex';
@@ -62,15 +63,22 @@ const PinnedChatList = () => {
           gap={1}
           css={{ marginBottom: theme.sizes.spacing.getSpacing(3) }}
         >
-          <Overline
-            css={{
-              padding: `0 ${theme.sizes.spacing.getSpacing(1)}px`,
-              color: theme.colors.tokens.icon,
-              fontSize: 13,
-            }}
-          >
-            {t('label.pinnedChats')}
-          </Overline>
+          <Flex direction="row" align="center">
+            <Pin
+              size={13}
+              color={theme.colors.tokens.icon}
+              css={{ transform: 'rotate(30deg)' }}
+            />
+            <Overline
+              css={{
+                padding: `0 ${theme.sizes.spacing.getSpacing(1)}px`,
+                color: theme.colors.tokens.icon,
+                fontSize: 13,
+              }}
+            >
+              {t('label.pinnedChats')}
+            </Overline>
+          </Flex>
           <Grid>
             {pinnedChats.map((pinnedChat, index) => (
               <PinnedChatLink

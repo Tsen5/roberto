@@ -3,6 +3,7 @@ import { useCallback, useMemo } from 'react';
 import { useEventListener } from 'usehooks-ts';
 import { useTheme } from '@emotion/react';
 import { useTranslation } from 'react-i18next';
+import { MessageCircle } from 'lucide-react';
 
 import useChats from '../../../../hooks/useChats';
 import Flex from '../../../ui/flex/flex';
@@ -78,15 +79,18 @@ const ChatList = () => {
 
   return (
     <Flex direction="column" gap={1}>
-      <Overline
-        css={{
-          padding: `0 ${theme.sizes.spacing.getSpacing(1)}px`,
-          color: theme.colors.tokens.icon,
-          fontSize: 13,
-        }}
-      >
-        {t('label.chats')}
-      </Overline>
+      <Flex direction="row" align="center">
+        <MessageCircle size={13} color={theme.colors.tokens.icon} />
+        <Overline
+          css={{
+            padding: `0 ${theme.sizes.spacing.getSpacing(1)}px`,
+            color: theme.colors.tokens.icon,
+            fontSize: 13,
+          }}
+        >
+          {t('label.chats')}
+        </Overline>
+      </Flex>
       {sortedChats.length > 0 && (
         <Flex direction="column" gap={0.5}>
           {sortedChats.map((chat) => (
