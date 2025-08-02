@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { CircleOff } from 'lucide-react';
 
 import { Chat } from '../../../../../electron/types/chat';
 import useChatEmoji from '../../../../hooks/useChatEmoji';
@@ -81,8 +82,9 @@ const ChatIdentity = ({ chat }: ChatIdentityProps) => {
             variant={isEmojiPopoverOpen ? 'soft' : 'plain'}
             css={{ fontSize: 40, height: 56 }}
             onClick={handleOpenEmojiPopover}
+            color="text"
           >
-            {emoji}
+            {emoji ?? <CircleOff size={26} />}
           </IconButton>
         }
       />
