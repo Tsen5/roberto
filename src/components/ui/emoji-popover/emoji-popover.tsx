@@ -1,12 +1,12 @@
 import { Emoji, EmojiPicker, Locale } from 'frimousse';
 import { MouseEvent, ReactNode, RefObject, useCallback, useRef } from 'react';
-
 import { useTranslation } from 'react-i18next';
 import { useOnClickOutside } from 'usehooks-ts';
 
 import Popover from '../popover/popover';
 import PopoverContent from '../popover/popover-content';
 import PopoverTrigger from '../popover/popover-trigger';
+
 import CategoryHeader from './category-header';
 import EmojiButton from './emoji-button';
 import EmojiPickerEmpty from './emoji-picker-empty';

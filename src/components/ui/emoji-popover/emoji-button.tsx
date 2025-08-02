@@ -1,4 +1,5 @@
 import { Emoji, EmojiPickerListEmojiProps } from 'frimousse';
+
 import IconButton from '../icon-button/icon-button';
 
 export interface EmojiButtonProps

@@ -12,8 +12,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Chat, ChatStatus } from '../../../../../../electron/types/chat';
 import useChatTitle from '../../../../../hooks/useChatTitle';
-
 import useChatEmoji from '../../../../../hooks/useChatEmoji';
+
 import { getLinkStyle } from './getLinkStyle';
 import Title from './title';
 import TitleInput from './title-input';

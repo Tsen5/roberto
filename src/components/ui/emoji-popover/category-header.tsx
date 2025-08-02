@@ -1,5 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { EmojiPickerListCategoryHeaderProps } from 'frimousse';
+
 import Overline from '../overline/overline';
 
 export type CategoryHeaderProps = EmojiPickerListCategoryHeaderProps;

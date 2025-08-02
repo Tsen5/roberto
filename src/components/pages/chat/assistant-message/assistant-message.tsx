@@ -2,7 +2,6 @@ import { memo } from 'react';
 import Markdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
-
 import 'highlight.js/styles/github-dark-dimmed.css';
 
 import { Message } from '../../../../../electron/types/chat';

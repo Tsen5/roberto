@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { getGlassmorphismStyle } from '../../../helpers/getGlassmorphismStyle';
 
 const UserMessage = styled('div')(({ theme }) => ({

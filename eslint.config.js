@@ -105,6 +105,7 @@ export default tseslint.config(
             'object',
             'unknown',
           ],
+          'newlines-between': 'always',
           warnOnUnassignedImports: true,
         },
       ],

@@ -1,6 +1,9 @@
 import path from 'node:path';
+
 import { $ } from 'zx';
+
 import { appConfig } from './electron.config';
+
 import type { Configuration } from 'electron-builder';
 
 /**

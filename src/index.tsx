@@ -8,9 +8,7 @@ import {
 } from '@tanstack/react-router';
 
 import theme from './theme';
-
 import './localization';
-
 // Import the generated route tree
 import { routeTree } from './routeTree.gen.ts';
 

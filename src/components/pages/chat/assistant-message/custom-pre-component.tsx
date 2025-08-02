@@ -11,8 +11,8 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { onlyText } from '../../../../helpers/onlyText';
-
 import Flex from '../../../ui/flex/flex';
+
 import CopyCodeButton from './copy-code-button';
 
 export type CustomPreComponentProps = DetailedHTMLProps<

@@ -1,6 +1,8 @@
 import { Theme } from '@emotion/react';
 import { transparentize } from 'color2k';
+
 import { getGlassmorphismStyle } from '../../../../../helpers/getGlassmorphismStyle';
+
 import { CHAT_LINK_ICON_CLASS } from './chat-link';
 
 export const getLinkStyle = (isCurrent: boolean, theme: Theme) => ({

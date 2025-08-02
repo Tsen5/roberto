@@ -11,6 +11,7 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEventListener } from 'usehooks-ts';
+
 import usePlatform from '../../../hooks/usePlatform';
 import KeyBadge from '../../layout/titlebar/section-center/key-badge';
 import IconButton from '../../ui/icon-button/icon-button';

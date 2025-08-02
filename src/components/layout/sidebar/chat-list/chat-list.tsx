@@ -1,10 +1,10 @@
 import { useCallback, useMemo } from 'react';
-
 import { useMatch, useNavigate } from '@tanstack/react-router';
 import { useEventListener } from 'usehooks-ts';
 
 import useChats from '../../../../hooks/useChats';
 import Flex from '../../../ui/flex/flex';
+
 import ChatLink from './chat-link/chat-link';
 
 const ChatList = () => {

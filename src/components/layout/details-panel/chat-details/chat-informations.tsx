@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@emotion/react';
+
 import { Chat } from '../../../../../electron/types/chat';
 import Flex from '../../../ui/flex/flex';
 

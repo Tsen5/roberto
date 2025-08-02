@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { defineConfig } from 'vite';
 import electron from 'vite-plugin-electron/simple';
 import react from '@vitejs/plugin-react';

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { EmojiPicker } from 'frimousse';
+
 import { getGlassmorphismStyle } from '../../../helpers/getGlassmorphismStyle';
 
 const EmojiPickerRoot = styled(EmojiPicker.Root)(({ theme }) => ({

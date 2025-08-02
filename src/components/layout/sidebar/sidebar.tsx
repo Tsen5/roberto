@@ -8,9 +8,9 @@ import { useEventListener } from 'usehooks-ts';
 import usePlatform from '../../../hooks/usePlatform';
 import Button from '../../ui/button/button';
 import KeyBadge from '../titlebar/section-center/key-badge';
-
 import Flex from '../../ui/flex/flex';
 import Overline from '../../ui/overline/overline';
+
 import ChatList from './chat-list/chat-list';
 import Container from './container';
 

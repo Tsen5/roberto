@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
+
 import { tokens } from '../../../theme/colors';
+
 import { jumping } from './jumping';
 
 export interface DotProps {

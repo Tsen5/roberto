@@ -11,7 +11,6 @@ import {
   useIntersectionObserver,
   useResizeObserver,
 } from 'usehooks-ts';
-
 import { useTheme } from '@emotion/react';
 
 import { AuthorType, Chat, ChatStatus } from '../../../../electron/types/chat';

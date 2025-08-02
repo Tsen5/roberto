@@ -6,12 +6,14 @@ import {
   useRef,
   useState,
 } from 'react';
+
 import { Chat } from '../../../../../electron/types/chat';
 import useChatEmoji from '../../../../hooks/useChatEmoji';
 import useChatTitle from '../../../../hooks/useChatTitle';
 import EmojiPopover from '../../../ui/emoji-popover/emoji-popover';
 import Flex from '../../../ui/flex/flex';
 import IconButton from '../../../ui/icon-button/icon-button';
+
 import TitleInput from './title-input';
 
 export interface ChatIdentityProps {

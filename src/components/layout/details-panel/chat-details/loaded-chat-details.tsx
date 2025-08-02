@@ -1,6 +1,7 @@
 import { useTheme } from '@emotion/react';
 
 import { Chat } from '../../../../../electron/types/chat';
+
 import ChatIdentity from './chat-identity';
 import ChatInformations from './chat-informations';
 

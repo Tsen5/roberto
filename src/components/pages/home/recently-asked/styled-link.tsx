@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Link } from '@tanstack/react-router';
+
 import { getGlassmorphismStyle } from '../../../../helpers/getGlassmorphismStyle';
 
 const StyledLink = styled(Link)(({ theme }) => ({

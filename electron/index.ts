@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { app, BrowserWindow, shell } from 'electron';
 // import { registerLlmRpc } from "./rpc/llmRpc.ts";
 import { getLlama } from 'node-llama-cpp';
@@ -26,7 +27,10 @@ const llama = await getLlama();
 //   modelsDirectory,
 // );
 
-const modelPath = path.join(modelsDirectory, 'hf_bartowski_gemma-2-2b-it.Q6_K_L.gguf');
+const modelPath = path.join(
+  modelsDirectory,
+  'hf_bartowski_gemma-2-2b-it.Q6_K_L.gguf',
+);
 
 export const model = await llama.loadModel({ modelPath });
 

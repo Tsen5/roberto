@@ -6,8 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { useEventListener } from 'usehooks-ts';
 
 import usePlatform from '../../../../hooks/usePlatform';
-
 import Flex from '../../../ui/flex/flex';
+
 import AskInput from './ask-input';
 import InputContainer from './input-container';
 import KeyBadge from './key-badge';

@@ -11,17 +11,17 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEventListener } from 'usehooks-ts';
-
 import { useTheme } from '@emotion/react';
+
 import { Chat, ChatStatus } from '../../../../../electron/types/chat';
 import usePlatform from '../../../../hooks/usePlatform';
 import KeyBadge from '../../../layout/titlebar/section-center/key-badge';
 import IconButton from '../../../ui/icon-button/icon-button';
 import Spinner from '../../../ui/spinner/spinner';
-
 import { getGlassmorphismStyle } from '../../../../helpers/getGlassmorphismStyle';
 import useChatsStore from '../../../../stores/chats';
 import Flex from '../../../ui/flex/flex';
+
 import AskInput from './ask-input';
 import AskInputCard from './ask-input-card';
 import AskInputContainer from './ask-input-container';
