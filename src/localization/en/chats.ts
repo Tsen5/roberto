@@ -12,6 +12,10 @@ export default {
   button: {
     copyCode: 'Copy code',
     copied: 'Copied',
+    pinChat: 'Pin chat',
+    unpinChat: 'Unpin chat',
+    deleteChat: 'Delete chat',
+    confirmDeleteChat: 'Confirm delete',
   },
   text: {
     askAnything: 'Ask anything...',

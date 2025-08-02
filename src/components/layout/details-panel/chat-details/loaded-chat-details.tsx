@@ -7,6 +7,7 @@ import useChatsStore from '../../../../stores/chats';
 
 import ChatIdentity from './chat-identity';
 import ChatInformations from './chat-informations';
+import ChatActions from './chat-actions/chat-actions';
 
 export interface LoadedChatDetailsProps {
   chat: Chat;
@@ -32,11 +33,12 @@ const LoadedChatDetails = ({ chat }: LoadedChatDetailsProps) => {
   return (
     <div
       css={{
-        padding: `${theme.sizes.spacing.getSpacing(2)}px ${theme.sizes.spacing.getSpacing(1)}px`,
+        padding: `${theme.sizes.spacing.getSpacing(2)}px ${theme.sizes.spacing.getSpacing(2)}px`,
       }}
     >
       <ChatIdentity chat={chat} />
       <ChatInformations chat={chat} />
+      <ChatActions chat={chat} />
     </div>
   );
 };

@@ -12,6 +12,10 @@ export default {
   button: {
     copyCode: 'Copier le code',
     copied: 'Copié',
+    pinChat: 'Épingler la conversation',
+    unpinChat: 'Désépingler la conversation',
+    deleteChat: 'Supprimer la conversation',
+    confirmDeleteChat: 'Confirmer la suppression',
   },
   text: {
     askAnything: 'Poser une question...',
