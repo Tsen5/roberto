@@ -1,7 +1,8 @@
 import { BrowserWindow } from 'electron';
 import { LlamaChatSession, LlamaContext } from 'node-llama-cpp';
 
-import { Chat } from '../types/chat';
+import { Chat, Prompt, MessageFile } from '../types/chat';
+import { createPrompt } from '../utils/createPrompt';
 
 type ChatLlamaCPP = {
   context: LlamaContext;
@@ -53,6 +54,46 @@ export function deleteChat(chatId: string): void {
   BrowserWindow.getAllWindows().forEach((win) => {
     win.webContents.send('chats:update', Object.values(chatsById));
   });
+}
+
+export function setChatCurrentPrompt(chatId: string, prompt: Prompt): Prompt {
+  updateChat(chatId, { currentPrompt: prompt });
+  return prompt;
+}
+
+export function updateChatCurrentPrompt(
+  chatId: string,
+  prompt: Partial<Prompt>,
+): Prompt {
+  const existingChat = getChat(chatId);
+  const updatedPrompt = { ...existingChat.currentPrompt, ...prompt };
+  return setChatCurrentPrompt(chatId, updatedPrompt);
+}
+
+export function clearChatCurrentPrompt(chatId: string): Prompt {
+  const prompt = createPrompt();
+  return setChatCurrentPrompt(chatId, prompt);
+}
+
+export function addChatCurrentPromptFiles(
+  chatId: string,
+  files: MessageFile[],
+): MessageFile[] {
+  const chat = getChat(chatId);
+  const updatedPromptFiles = [...chat.currentPrompt.files, ...files];
+  updateChatCurrentPrompt(chatId, { files: updatedPromptFiles });
+  return updatedPromptFiles;
+}
+
+export function removeChatCurrentPromptFile(
+  chatId: string,
+  fileId: string,
+): Prompt {
+  const chat = getChat(chatId);
+  const updatedPromptFiles = chat.currentPrompt.files.filter(
+    (file) => file.id !== fileId,
+  );
+  return updateChatCurrentPrompt(chatId, { files: updatedPromptFiles });
 }
 
 export function getChatLlamaCPP(chatId: string): ChatLlamaCPP {

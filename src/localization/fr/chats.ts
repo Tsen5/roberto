@@ -16,6 +16,7 @@ export default {
     unpinChat: 'Désépingler la conversation',
     deleteChat: 'Supprimer la conversation',
     confirmDeleteChat: 'Confirmer la suppression',
+    addFiles: 'Ajouter des fichiers',
   },
   text: {
     askAnything: 'Poser une question...',

@@ -2,6 +2,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Chat, ChatStatus } from '../types/chat';
 
+import { createPrompt } from './createPrompt';
+
 export const createChat = ({
   id = uuidv4(),
   messages = [],
@@ -10,6 +12,7 @@ export const createChat = ({
   title = null,
   status = ChatStatus.CREATING,
   emoji = null,
+  currentPrompt = createPrompt(),
 }: Partial<Chat> = {}): Chat => ({
   id,
   messages,
@@ -18,4 +21,5 @@ export const createChat = ({
   title,
   status,
   emoji,
+  currentPrompt,
 });

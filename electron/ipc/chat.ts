@@ -1,13 +1,16 @@
-import { ipcMain } from 'electron';
+import { BrowserWindow, dialog, ipcMain } from 'electron';
 import { LlamaChatSession } from 'node-llama-cpp';
 import { v4 as uuidv4 } from 'uuid';
 
 import { model } from '..';
+import i18n from '../../src/localization';
 import {
+  addChatCurrentPromptFiles,
   deleteChat,
   getChat,
   getChatLlamaCPP,
   getChats,
+  removeChatCurrentPromptFile,
   setChat,
   setChatLlamaCPP,
   updateChat,
@@ -15,9 +18,10 @@ import {
 import { AuthorType, ChatStatus } from '../types/chat';
 import { createChat } from '../utils/createChat';
 import { createMessage } from '../utils/createMessage';
-import i18n from '../../src/localization';
+import { createMessageFile } from '../utils/createMessageFile';
+import { getPDFContent } from '../utils/getPDFContent';
 
-export function registerChatIPC() {
+export function registerChatIPC(win: BrowserWindow) {
   ipcMain.handle('chat:create', async () => {
     const context = await model.createContext({
       contextSize: { max: 8096 }, // omit this for a longer context size, but increased memory usage
@@ -48,6 +52,22 @@ export function registerChatIPC() {
     return getChats();
   });
 
+  ipcMain.handle('chat:addFiles', async (event, chatId: string) => {
+    const { filePaths } = await dialog.showOpenDialog(win, {
+      properties: ['openFile', 'multiSelections'],
+      filters: [{ name: 'PDF', extensions: ['pdf'] }],
+    });
+    const promptFiles = filePaths.map((filePath) =>
+      createMessageFile({ path: filePath }),
+    );
+    addChatCurrentPromptFiles(chatId, promptFiles);
+    return promptFiles;
+  });
+
+  ipcMain.handle('chat:removeFile', (event, chatId: string, fileId: string) => {
+    return removeChatCurrentPromptFile(chatId, fileId);
+  });
+
   ipcMain.on('chat:ask', async (event, chatId: string, prompt: string) => {
     try {
       updateChat(chatId, { status: ChatStatus.LISTENING });
@@ -61,16 +81,24 @@ export function registerChatIPC() {
       const newUserMessage = createMessage({
         content: prompt,
         authorType: AuthorType.USER,
+        files: chat.currentPrompt.files,
       });
+
+      const pdfContents = await Promise.all(
+        chat.currentPrompt.files.map(async (file) => getPDFContent(file.path)),
+      );
+
+      const parsedPrompt = `${prompt}\n\n${pdfContents.join('\n\n')}`;
 
       updateChat(chatId, {
         messages: [...chat.messages, newUserMessage],
         status: ChatStatus.RESPONDING,
+        currentPrompt: { files: [] },
       });
 
       const assistantMessageId = uuidv4();
 
-      await chatLlamaCPP.session.prompt(prompt, {
+      await chatLlamaCPP.session.prompt(parsedPrompt, {
         onResponseChunk(chunk) {
           const updatedChat = getChat(chatId);
           const lastMessage =

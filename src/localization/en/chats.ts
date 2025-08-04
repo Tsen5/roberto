@@ -16,6 +16,7 @@ export default {
     unpinChat: 'Unpin chat',
     deleteChat: 'Delete chat',
     confirmDeleteChat: 'Confirm delete',
+    addFiles: 'Add files',
   },
   text: {
     askAnything: 'Ask anything...',

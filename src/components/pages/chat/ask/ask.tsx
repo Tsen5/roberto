@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import { Info, SendHorizonal } from 'lucide-react';
 import {
   ChangeEvent,
@@ -11,20 +12,20 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEventListener } from 'usehooks-ts';
-import { useTheme } from '@emotion/react';
 
 import { Chat, ChatStatus } from '../../../../../electron/types/chat';
+import { getGlassmorphismStyle } from '../../../../helpers/getGlassmorphismStyle';
 import usePlatform from '../../../../hooks/usePlatform';
+import useChatsStore from '../../../../stores/chats';
 import KeyBadge from '../../../layout/titlebar/section-center/key-badge';
+import Flex from '../../../ui/flex/flex';
 import IconButton from '../../../ui/icon-button/icon-button';
 import Spinner from '../../../ui/spinner/spinner';
-import { getGlassmorphismStyle } from '../../../../helpers/getGlassmorphismStyle';
-import useChatsStore from '../../../../stores/chats';
-import Flex from '../../../ui/flex/flex';
 
 import AskInput from './ask-input';
 import AskInputCard from './ask-input-card';
 import AskInputContainer from './ask-input-container';
+import PromptFileChip from './prompt-file-chip/prompt-file-chip';
 
 export interface AskProps {
   ref: RefObject<HTMLDivElement | null>;
@@ -129,33 +130,46 @@ const Ask = ({ ref, chat }: AskProps) => {
         css={{ maxWidth: theme.sizes.layout.chat.maxWidth }}
       >
         <AskInputCard onClick={handleClickInputContainer}>
-          <AskInput
-            ref={askInputRef}
-            value={askInputValue}
-            onChange={handleChangePrompt}
-            onKeyDown={handleAskInputKeyDown}
-            onFocus={handleFocusAskInput}
-            onBlur={handleInputBlur}
-            placeholder={t('text.askAnything')}
-          />
-          <KeyBadge css={{ marginRight: 0, marginBottom: 7 }}>
-            {isAskInputFocused ? t('label.escapeKey') : metaKey}
-          </KeyBadge>
-          <IconButton
-            color="icon"
-            variant="plain"
-            onClick={handleAsk}
-            disabled={!isAskInputValueValid}
-          >
-            {chat.status === ChatStatus.RESPONDING ? (
-              <Spinner size={22} color="icon" />
-            ) : (
-              <SendHorizonal
-                size={22}
-                css={{ opacity: !isAskInputValueValid ? 0.5 : 1 }}
-              />
+          <Flex direction="column" gap={1.5}>
+            {chat.currentPrompt.files.length > 0 && (
+              <Flex direction="row" align="center" gap={1} wrap="wrap">
+                {chat.currentPrompt.files.map((file) => (
+                  <PromptFileChip key={file.id} chat={chat} file={file} />
+                ))}
+              </Flex>
             )}
-          </IconButton>
+            <Flex direction="row" align="flex-end" gap={1}>
+              {/* SLE: removing feature because of gemma model limitations */}
+              {/* <AddFilesButton chat={chat} /> */}
+              <AskInput
+                ref={askInputRef}
+                value={askInputValue}
+                onChange={handleChangePrompt}
+                onKeyDown={handleAskInputKeyDown}
+                onFocus={handleFocusAskInput}
+                onBlur={handleInputBlur}
+                placeholder={t('text.askAnything')}
+              />
+              <KeyBadge css={{ marginRight: 0, marginBottom: 7 }}>
+                {isAskInputFocused ? t('label.escapeKey') : metaKey}
+              </KeyBadge>
+              <IconButton
+                color="icon"
+                variant="plain"
+                onClick={handleAsk}
+                disabled={!isAskInputValueValid}
+              >
+                {chat.status === ChatStatus.RESPONDING ? (
+                  <Spinner size={22} color="icon" />
+                ) : (
+                  <SendHorizonal
+                    size={22}
+                    css={{ opacity: !isAskInputValueValid ? 0.5 : 1 }}
+                  />
+                )}
+              </IconButton>
+            </Flex>
+          </Flex>
         </AskInputCard>
         <Flex
           align="center"

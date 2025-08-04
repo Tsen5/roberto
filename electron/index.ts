@@ -71,7 +71,7 @@ function createWindow() {
   });
 
   registerGlobalIPC();
-  registerChatIPC();
+  registerChatIPC(win);
 
   // open external links in the default browser
   win.webContents.setWindowOpenHandler(({ url }) => {

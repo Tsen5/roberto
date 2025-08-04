@@ -6,12 +6,14 @@ export const createMessage = ({
   id = uuidv4(),
   authorType = AuthorType.USER,
   content = '',
+  files = [],
   createdAt = new Date(),
   updatedAt = new Date(),
 }: Partial<Message> = {}): Message => ({
   id,
   authorType,
   content,
+  files,
   createdAt,
   updatedAt,
 });

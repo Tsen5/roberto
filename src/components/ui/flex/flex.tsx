@@ -11,6 +11,7 @@ export interface FlexProps extends ComponentProps<'div'> {
   basis?: CSSProperties['flexBasis'];
   width?: CSSProperties['width'];
   height?: CSSProperties['height'];
+  wrap?: CSSProperties['flexWrap'];
 }
 
 const Flex = styled('div', {
@@ -23,7 +24,8 @@ const Flex = styled('div', {
     prop !== 'shrink' &&
     prop !== 'basis' &&
     prop !== 'width' &&
-    prop !== 'height',
+    prop !== 'height' &&
+    prop !== 'wrap',
 })<FlexProps>(
   ({
     theme,
@@ -36,6 +38,7 @@ const Flex = styled('div', {
     basis = undefined,
     width = undefined,
     height = undefined,
+    wrap = undefined,
   }) => ({
     display: 'flex',
     flexDirection: direction,
@@ -47,6 +50,7 @@ const Flex = styled('div', {
     flexBasis: basis,
     width: width,
     height: height,
+    flexWrap: wrap,
   }),
 );
 

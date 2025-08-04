@@ -17,6 +17,7 @@ import KeyBadge from '../../layout/titlebar/section-center/key-badge';
 import IconButton from '../../ui/icon-button/icon-button';
 import AskInput from '../chat/ask/ask-input';
 import AskInputCard from '../chat/ask/ask-input-card';
+import Flex from '../../ui/flex/flex';
 
 const Ask = () => {
   const { t } = useTranslation('chats');
@@ -110,29 +111,31 @@ const Ask = () => {
 
   return (
     <AskInputCard onClick={handleClickInputContainer}>
-      <AskInput
-        ref={askInputRef}
-        value={askInputValue}
-        onChange={handleChangePrompt}
-        onKeyDown={handleAskInputKeyDown}
-        onFocus={handleFocusAskInput}
-        onBlur={handleInputBlur}
-        placeholder={t('text.askAnything')}
-      />
-      <KeyBadge css={{ marginRight: 0, marginBottom: 7 }}>
-        {isAskInputFocused ? t('label.escapeKey') : metaKey}
-      </KeyBadge>
-      <IconButton
-        color="icon"
-        variant="plain"
-        onClick={handleAsk}
-        disabled={!isAskInputValueValid}
-      >
-        <SendHorizonal
-          size={22}
-          css={{ opacity: !isAskInputValueValid ? 0.5 : 1 }}
+      <Flex direction="row" align="flex-end" gap={1}>
+        <AskInput
+          ref={askInputRef}
+          value={askInputValue}
+          onChange={handleChangePrompt}
+          onKeyDown={handleAskInputKeyDown}
+          onFocus={handleFocusAskInput}
+          onBlur={handleInputBlur}
+          placeholder={t('text.askAnything')}
         />
-      </IconButton>
+        <KeyBadge css={{ marginRight: 0, marginBottom: 7 }}>
+          {isAskInputFocused ? t('label.escapeKey') : metaKey}
+        </KeyBadge>
+        <IconButton
+          color="icon"
+          variant="plain"
+          onClick={handleAsk}
+          disabled={!isAskInputValueValid}
+        >
+          <SendHorizonal
+            size={22}
+            css={{ opacity: !isAskInputValueValid ? 0.5 : 1 }}
+          />
+        </IconButton>
+      </Flex>
     </AskInputCard>
   );
 };

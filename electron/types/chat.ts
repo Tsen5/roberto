@@ -12,11 +12,21 @@ export enum ChatStatus {
   ERROR = 'error',
 }
 
+export interface MessageFile {
+  id: string;
+  path: string;
+}
+
+export interface Prompt {
+  files: MessageFile[];
+}
+
 export interface Chat extends Entity {
   title: string | null;
   emoji: string | null;
   messages: Message[];
   status: ChatStatus;
+  currentPrompt: Prompt;
 }
 
 export enum AuthorType {
@@ -27,4 +37,5 @@ export enum AuthorType {
 export interface Message extends Entity {
   authorType: AuthorType;
   content: string;
+  files: MessageFile[];
 }
