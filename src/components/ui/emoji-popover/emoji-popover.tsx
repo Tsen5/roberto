@@ -1,7 +1,6 @@
 import { Emoji, EmojiPicker, Locale } from 'frimousse';
-import { MouseEvent, ReactNode, RefObject, useCallback, useRef } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useOnClickOutside } from 'usehooks-ts';
 
 import Popover from '../popover/popover';
 import PopoverContent from '../popover/popover-content';
@@ -34,16 +33,6 @@ const EmojiPopover = ({
     i18n: { language },
   } = useTranslation('chats');
 
-  const popoverRef = useRef<HTMLDivElement>(null);
-
-  const handleClickOutsidePopover = useCallback(() => {
-    setIsOpen(false);
-  }, [setIsOpen]);
-
-  const handleTriggerMouseDown = useCallback((event: MouseEvent) => {
-    event.stopPropagation();
-  }, []);
-
   const handleSelectEmoji = useCallback(
     (emoji: Emoji) => () => {
       onChange(emoji.emoji);
@@ -51,17 +40,14 @@ const EmojiPopover = ({
     [onChange],
   );
 
-  useOnClickOutside(
-    popoverRef as RefObject<HTMLElement>,
-    handleClickOutsidePopover,
-  );
+  const handleChangePopoverOpen = useCallback((newIsOpen: boolean) => {
+    setIsOpen(newIsOpen);
+  }, []);
 
   return (
-    <Popover open={isOpen}>
-      <PopoverTrigger onMouseDown={handleTriggerMouseDown} asChild>
-        {trigger}
-      </PopoverTrigger>
-      <PopoverContent ref={popoverRef}>
+    <Popover open={isOpen} onOpenChange={handleChangePopoverOpen}>
+      <PopoverTrigger asChild>{trigger}</PopoverTrigger>
+      <PopoverContent>
         <EmojiPickerRoot locale={language as Locale}>
           <EmojiPickerSearch />
           <EmojiPicker.Viewport>
