@@ -14,7 +14,7 @@ export default tseslint.config(
   {
     files: ['**/**.{,c,m}{js,ts}{,x}'],
     extends: [
-      stylistic.configs['recommended-flat'],
+      stylistic.configs.recommended,
       jsdoc.configs['flat/recommended'],
       importPlugin.flatConfigs.recommended,
     ],
