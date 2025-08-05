@@ -4,19 +4,27 @@ import { PropsWithChildren, useMemo } from 'react';
 import useChatsStore from '../../../stores/chats';
 import { getGlassmorphismStyle } from '../../../helpers/getGlassmorphismStyle';
 
-const Container = ({ children }: PropsWithChildren) => {
+export interface ContainerProps {
+  canAccessDetailsPanel: boolean;
+}
+
+const Container = ({
+  children,
+  canAccessDetailsPanel,
+}: PropsWithChildren<ContainerProps>) => {
   const theme = useTheme();
 
   const isDetailsPanelOpen = useChatsStore((state) => state.isDetailsPanel);
 
   const marginRight = useMemo(() => {
-    if (!isDetailsPanelOpen) {
+    if (!isDetailsPanelOpen || !canAccessDetailsPanel) {
       return -(
         theme.sizes.layout.detailsPanel.width + theme.sizes.layout.page.padding
       );
     }
     return 0;
   }, [
+    canAccessDetailsPanel,
     isDetailsPanelOpen,
     theme.sizes.layout.detailsPanel.width,
     theme.sizes.layout.page.padding,

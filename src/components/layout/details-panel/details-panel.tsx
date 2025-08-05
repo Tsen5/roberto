@@ -8,8 +8,13 @@ const DetailsPanel = () => {
   const match = useMatch({ from: '/chats/$chatId', shouldThrow: false });
 
   const chatId = useMemo(() => match?.params.chatId, [match]);
+  const canAccessDetailsPanel = useMemo(() => !!chatId, [chatId]);
 
-  return <Container>{chatId && <ChatDetails chatId={chatId} />}</Container>;
+  return (
+    <Container canAccessDetailsPanel={canAccessDetailsPanel}>
+      {chatId && <ChatDetails chatId={chatId} />}
+    </Container>
+  );
 };
 
 export default DetailsPanel;
