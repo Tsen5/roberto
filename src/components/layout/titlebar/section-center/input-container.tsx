@@ -11,6 +11,8 @@ const InputContainer = styled('div')(({ theme }) => ({
   alignItems: 'center',
   borderRadius: theme.sizes.radius.getRadius(1),
   background: transparentize(theme.colors.palette.darkGrey, 0.9),
+  margin: theme.sizes.spacing.getSpacing(1),
+  maxWidth: theme.sizes.layout.chat.maxWidth,
   '&:hover': {
     background: transparentize(theme.colors.palette.darkGrey, 0.85),
   },

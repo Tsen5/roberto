@@ -80,10 +80,7 @@ const SectionCenter = () => {
   useEventListener('keydown', handleGlobalKeyDown);
 
   return (
-    <Flex
-      basis="calc(100% / 3)"
-      css={{ padding: theme.sizes.spacing.getSpacing(1) }}
-    >
+    <Flex basis="calc(100% / 3)" justify="center">
       <InputContainer onClick={handleClickInputContainer}>
         <MessageCircleQuestionMark
           size={20}

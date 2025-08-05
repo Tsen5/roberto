@@ -47,15 +47,13 @@ const SectionLeft = () => {
 
   return (
     <>
-      <div
-        css={{ flexBasis: 'calc(100% / 3)', paddingLeft: containerPaddingLeft }}
-      >
+      <div css={{ flexBasis: 'calc(100% / 3)' }}>
         <Flex
           align="center"
           gap={1}
           width="fit-content"
           height="100%"
-          css={{ appRegion: 'no-drag' }}
+          css={{ appRegion: 'no-drag', marginLeft: containerPaddingLeft }}
         >
           <IconButton color="icon" variant="plain" onClick={toggleSidebar}>
             {isSidebarOpen ? (
